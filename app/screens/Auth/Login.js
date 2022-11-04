@@ -43,7 +43,7 @@ const Login = ({ navigation }) => {
           }}>
           <CustomButton
             buttonText={"Giriş Yap"}
-            onPressFunc={() => navigation.navigate("Home")}
+            onPressFunc={() => navigation.navigate("CustomDrawerNavigator")}
           />
         </View>
         <TextButton
