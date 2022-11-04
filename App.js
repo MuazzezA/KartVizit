@@ -1,3 +1,4 @@
+import "react-native-gesture-handler"; // drawer menu kurulumunda burda en üstte olamak zorunda
 import React from "react";
 import Navigations from "./app/navigations/CustomStackNavigator";
 import { useFonts } from "expo-font";
