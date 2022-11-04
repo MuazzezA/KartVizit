@@ -3,9 +3,14 @@ import { View, TouchableOpacity, Image } from "react-native";
 import { theme } from "../constants/";
 const { SIZES } = theme;
 
-const CustomHeader = () => {
+const CustomHeader = ({
+  leftFunc = () => {},
+  leftIcon,
+  rightIcon,
+  rightFunc = () => {},
+}) => {
   return (
-    <View style={{ paddingHorizontal: SIZES.padding }}>
+    <View>
       <View
         style={{
           flexDirection: "row",
@@ -13,32 +18,39 @@ const CustomHeader = () => {
           paddingHorizontal: SIZES.padding,
         }}>
         <View style={{ flex: 1, alignItems: "flex-start" }}>
-          <TouchableOpacity onPress={() => console.log("Menu on clicked")}>
-            <Image
-              source={require("../assets/icons/menu_icon.png")}
-              resizeMode="contain"
-              style={{
-                width: 25,
-                height: 25,
-              }}
-            />
+          <TouchableOpacity
+            onPress={() => {
+              leftFunc();
+            }}>
+            {leftIcon ? (
+              <Image
+                source={leftIcon}
+                resizeMode="contain"
+                style={{
+                  width: 25,
+                  height: 25,
+                }}
+              />
+            ) : null}
           </TouchableOpacity>
         </View>
 
         <View style={{ alignItems: "flex-end" }}>
-          <TouchableOpacity
-            onPress={() => {
-              console.log("Cart on clicked");
-            }}>
-            <Image
-              source={require("../assets/icons/back_icon.png")}
-              resizeMode="contain"
-              style={{
-                width: 25,
-                height: 25,
-              }}
-            />
-          </TouchableOpacity>
+          {rightIcon ? (
+            <TouchableOpacity
+              onPress={() => {
+                rightFunc();
+              }}>
+              <Image
+                source={rightIcon}
+                resizeMode="contain"
+                style={{
+                  width: 25,
+                  height: 25,
+                }}
+              />
+            </TouchableOpacity>
+          ) : null}
         </View>
       </View>
     </View>

@@ -51,7 +51,9 @@ const Register = ({ navigation }) => {
           }}>
           <CustomButton
             buttonText={"Kayıt Ol"}
-            onPressFunc={() => navigation.navigate("Home")}></CustomButton>
+            onPressFunc={() =>
+              navigation.navigate("CustomDrawerNavigator")
+            }></CustomButton>
         </View>
         <TextButton
           onPressFunc={() => navigation.replace("Login")}
