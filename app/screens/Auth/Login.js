@@ -46,10 +46,7 @@ const Login = ({ navigation }) => {
             onPressFunc={() => navigation.navigate("CustomDrawerNavigator")}
           />
         </View>
-        <TextButton
-          onPressFunc={() => navigation.replace("Home2")}
-          buttonText={"animasyon"}
-        />
+
         <TextButton
           onPressFunc={() => navigation.replace("Register")}
           buttonText={"Kayıt Ol"}

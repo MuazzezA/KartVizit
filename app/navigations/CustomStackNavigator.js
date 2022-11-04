@@ -4,7 +4,6 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import CustomDrawerNavigator from "./CustomDrawerNavigator";
 
 import { Login, Register, Onboarding } from "../screens/Auth/";
-import Home2 from "../screens/home2";
 
 const Stack = createNativeStackNavigator();
 
@@ -33,11 +32,6 @@ const Navigations = () => {
           component={CustomDrawerNavigator}
           options={{ headerShown: false }}
         />
-        {/* <Stack.Screen
-          name="Home2"
-          component={Home2}
-          options={{ headerShown: false }}
-        /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );

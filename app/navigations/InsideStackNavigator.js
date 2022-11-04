@@ -2,12 +2,14 @@ import * as React from "react";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import Home from "../screens/Home";
-import AlertScreen from "../screens/AlertScreen";
-import MyCardsScreen from "../screens/MyCardsScreen";
-import MyCardInboxScreen from "../screens/MyCardInboxScreen";
-import StatisticScreen from "../screens/StatisticScreen";
-import ShareCardScreen from "../screens/ShareCardScreen";
+import {
+  Home,
+  AlertScreen,
+  MyCardsScreen,
+  MyCardInboxScreen,
+  StatisticScreen,
+  ShareCardScreen,
+} from "../screens";
 
 const Stack = createNativeStackNavigator();
 const InsideNavigations = () => {
