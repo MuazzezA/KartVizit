@@ -54,6 +54,38 @@ const Home = ({ navigation }) => {
   function rightFunc() {
     navigation.navigate("AlertScreen");
   }
+
+  const IconButtonList = () => {
+    return (
+      <View style={styles.iconButtons}>
+        <IconButton
+          icon={myCard}
+          onPress={() => {
+            navigation.navigate("MyCardsScreen");
+          }}
+        />
+        <IconButton
+          icon={inbox}
+          onPress={() => {
+            navigation.navigate("MyCardInboxScreen");
+          }}
+        />
+        <IconButton
+          icon={statistic}
+          onPress={() => {
+            navigation.navigate("StatisticScreen");
+          }}
+        />
+        <IconButton
+          icon={share}
+          onPress={() => {
+            navigation.navigate("ShareCardScreen");
+          }}
+        />
+      </View>
+    );
+  };
+
   return (
     <ScrollView>
       <View style={{ paddingTop: 30 }}>
@@ -96,27 +128,13 @@ const Home = ({ navigation }) => {
               });
 
               return (
-                <View
-                  style={{
-                    width: ITEM_SIZE,
-                    //backgroundColor: "white",
-                    height: 250,
-                  }}
-                  key={index.toString()}>
+                <View style={styles.cardList} key={index.toString()}>
                   <Animated.View
                     snapToInterval={ITEM_SIZE}
-                    style={{
-                      marginHorizontal: SPACING,
-                      padding: SPACING * 2,
-                      alignItems: "center",
-                      transform: [{ translateY }],
-                      backgroundColor: "transparent",
-                      borderRadius: 20,
-                    }}>
-                    <Image
-                      source={item.img}
-                      style={{ height: 240, resizeMode: "contain" }}
-                    />
+                    style={
+                      ({ transform: [{ translateY }] }, styles.cardInsideItem)
+                    }>
+                    <Image source={item.img} style={styles.cardImage} />
                   </Animated.View>
                 </View>
               );
@@ -124,54 +142,11 @@ const Home = ({ navigation }) => {
           />
         </View>
 
-        {/* 
-kartlarım
-gelen kartlar
-istatistikler
-kart gönder
-*/}
-
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-evenly",
-            alignItems: "center",
-            //backgroundColor: "white",
-            padding: 5,
-          }}>
-          <IconButton
-            icon={myCard}
-            onPress={() => {
-              navigation.navigate("MyCardsScreen");
-            }}
-          />
-          <IconButton
-            icon={inbox}
-            onPress={() => {
-              navigation.navigate("MyCardInboxScreen");
-            }}
-          />
-          <IconButton
-            icon={statistic}
-            onPress={() => {
-              navigation.navigate("StatisticScreen");
-            }}
-          />
-          <IconButton
-            icon={share}
-            onPress={() => {
-              navigation.navigate("ShareCardScreen");
-            }}
-          />
-        </View>
+        <IconButtonList />
 
         <Text style={[styles.header, { ...FONTS.body2 }]}>Özetler</Text>
 
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-around",
-          }}>
+        <View style={styles.charts}>
           <CustomProgressChart descriptionText="Kart Kapasitesi" data={[0.4]} />
           <CustomProgressChart
             descriptionText="Gelen Kartlarım"
@@ -188,5 +163,33 @@ const styles = StyleSheet.create({
   header: {
     textAlign: "center",
     padding: 15,
+  },
+  cardList: {
+    width: ITEM_SIZE,
+    //backgroundColor: "white",
+    height: 200,
+  },
+  cardInsideItem: {
+    marginHorizontal: SPACING,
+    padding: SPACING * 2,
+    alignItems: "center",
+
+    backgroundColor: "transparent",
+    borderRadius: 20,
+  },
+  cardImage: {
+    height: 160,
+    resizeMode: "contain",
+  },
+  iconButtons: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    //backgroundColor: "white",
+    padding: 5,
+  },
+  charts: {
+    flexDirection: "row",
+    justifyContent: "space-around",
   },
 });

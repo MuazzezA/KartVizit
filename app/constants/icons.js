@@ -8,6 +8,10 @@ export const statistic = require("../assets/icons/statistics.png");
 export const share = require("../assets/icons/share.png");
 export const menu = require("../assets/icons/menuIcon.png");
 export const alertIcon = require("../assets/icons/alertIcon.png");
+export const searchIcon = require("../assets/icons/search_icon.png");
+export const avatar = require("../assets/icons/avatar.png");
+export const thrash = require("../assets/icons/thrash.png");
+export const addToContact = require("../assets/icons/add_contacts.png");
 export default {
   myCard,
   people,
@@ -19,4 +23,8 @@ export default {
   share,
   menu,
   alertIcon,
+  searchIcon,
+  avatar,
+  thrash,
+  addToContact,
 };

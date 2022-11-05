@@ -4,7 +4,7 @@ import { FONTS } from "../constants/theme";
 const CustomTextInput = ({
   value = null,
   placeHolderText = "",
-  onChangeFunc = {},
+  onChangeFunc = () => {},
 }) => {
   return (
     <TextInput
@@ -25,7 +25,7 @@ const CustomTextInput = ({
         elevation: 4,
       }}
       value={value}
-      onChange={() => onChangeFunc}
+      onChange={() => onChangeFunc()}
       placeholder={placeHolderText}
     />
   );

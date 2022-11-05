@@ -2,12 +2,12 @@ import React from "react";
 import { TouchableOpacity, Image, StyleSheet } from "react-native";
 import { COLORS, SIZES } from "../constants";
 
-const IconButton = ({ icon, onPress = () => {} }) => {
+const IconButton = ({ icon, onPress = () => {}, color = COLORS.softBlue }) => {
   return (
     <TouchableOpacity
       onPress={onPress}
       activeOpacity={0.6}
-      style={styles.button}>
+      style={[styles.button, { backgroundColor: color }]}>
       {icon ? (
         <Image source={icon} style={styles.imageIcon} resizeMode="contain" />
       ) : null}
@@ -19,7 +19,6 @@ export default IconButton;
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: COLORS.softBlue,
     height: 50,
     width: 50,
     borderRadius: SIZES.radius,

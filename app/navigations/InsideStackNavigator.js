@@ -9,6 +9,7 @@ import {
   MyCardInboxScreen,
   StatisticScreen,
   ShareCardScreen,
+  CardDetailScreen,
 } from "../screens";
 
 const Stack = createNativeStackNavigator();
@@ -43,6 +44,11 @@ const InsideNavigations = () => {
       <Stack.Screen
         name="ShareCardScreen"
         component={ShareCardScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="CardDetailScreen"
+        component={CardDetailScreen}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
