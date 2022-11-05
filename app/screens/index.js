@@ -4,6 +4,7 @@ import MyCardsScreen from "./MyCardsScreen";
 import MyCardInboxScreen from "./MyCardInboxScreen";
 import StatisticScreen from "./StatisticScreen";
 import ShareCardScreen from "./ShareCardScreen";
+import CardDetailScreen from "./CardDetailScreen";
 
 export {
   Home,
@@ -12,4 +13,5 @@ export {
   MyCardInboxScreen,
   StatisticScreen,
   ShareCardScreen,
+  CardDetailScreen,
 };
