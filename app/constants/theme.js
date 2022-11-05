@@ -12,6 +12,7 @@ export const COLORS = {
   lilac: "#C8B6E2",
   white: "#F6F5F5",
   blue2: "#3282B8",
+  red: "#BD1616",
 };
 
 export const SIZES = {
