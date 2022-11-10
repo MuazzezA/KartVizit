@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, View, Image, ScrollView, StyleSheet } from "react-native";
 
-import IconButton from "../components/IconButton";
+import { IconButton, Seperator } from "../components/";
 import { theme, icons } from "../constants";
 
 const { COLORS, SIZES, FONTS } = theme;
@@ -40,6 +40,7 @@ const Buttons = ({ card, isMyCard }) => {
         <IconButton icon={thrash} color={COLORS.red} />
         <Text style={{ ...FONTS.desc2, color: COLORS.red }}>Kartı Sil</Text>
       </View>
+
       {isMyCard ? (
         <View style={styles.centerContainer}>
           <IconButton icon={share} />
@@ -67,7 +68,7 @@ const CardDetailScreen = ({ route, navigation }) => {
         <View style={styles.centerContainer}>
           <CardScrollView card={card} />
         </View>
-        <View style={styles.seperator} />
+        <Seperator />
         <Text style={{ ...FONTS.desc1, paddingVertical: SIZES.padding }}>
           Detaylar
         </Text>
@@ -84,7 +85,7 @@ const CardDetailScreen = ({ route, navigation }) => {
         {textDesc("Ülke/Şehir", "Türkiye/Konya")}
         {textDesc("Adres", "bilim merkezi ştm")}
 
-        <View style={styles.seperator} />
+        <Seperator />
         <Text style={{ ...FONTS.desc1, paddingVertical: SIZES.padding }}>
           İşlemler
         </Text>
@@ -114,11 +115,7 @@ const styles = StyleSheet.create({
     width: SIZES.width - 60,
     height: 180,
   },
-  seperator: {
-    marginVertical: SIZES.padding,
-    height: 2,
-    backgroundColor: COLORS.blue2,
-  },
+
   buttonContainer: {
     flex: 1,
     flexDirection: "row",
