@@ -99,7 +99,7 @@ const Home = ({ navigation }) => {
           <Animated.FlatList
             showsHorizontalScrollIndicator={false}
             data={cards}
-            keyExtractor={(item) => item.key}
+            keyExtractor={(item, index) => index}
             horizontal
             pagingEnabled
             bounces={false}
@@ -128,7 +128,7 @@ const Home = ({ navigation }) => {
               });
 
               return (
-                <View style={styles.cardList} key={index.toString()}>
+                <View style={styles.cardList} key={index}>
                   <Animated.View
                     snapToInterval={ITEM_SIZE}
                     style={

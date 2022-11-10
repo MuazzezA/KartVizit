@@ -13,6 +13,7 @@ export const COLORS = {
   white: "#F6F5F5",
   blue2: "#3282B8",
   red: "#BD1616",
+  softGreen: "#BAD1C2",
 };
 
 export const SIZES = {

@@ -6,6 +6,7 @@ const SearchBar = ({
   value = null,
   placeHolderText = "",
   onChangeFunc = () => {},
+  backgroundColor = COLORS.blue,
   icon,
 }) => {
   return (
@@ -16,7 +17,7 @@ const SearchBar = ({
         alignItems: "center",
         width: SIZES.width - SIZES.padding,
         marginHorizontal: SIZES.padding,
-        backgroundColor: COLORS.blue,
+        backgroundColor: backgroundColor,
         borderRadius: SIZES.radius,
         height: 40,
         marginVertical: SIZES.padding,
