@@ -7,6 +7,7 @@ export const COLORS = {
   beige: "#E8DFCA",
   lightBeige: "#F5EFE6",
   lightGrey: "#F1F1F1",
+  darkGrey: "#3C4048",
   black: "#100F0F",
   purple: "#7858A6",
   lilac: "#C8B6E2",
@@ -23,9 +24,10 @@ export const SIZES = {
   padding: 15,
 
   h1: 30,
-  h2: 22,
+  h2: 20,
   h3: 16,
   h4: 14,
+  h5: 12,
   body1: 36,
 
   width,
@@ -46,9 +48,14 @@ export const FONTS = {
   h3: {
     fontFamily: "Montserrat_Bold",
     fontSize: SIZES.h3,
-    lineHeight: 24,
+    lineHeight: 20,
   },
   h4: {
+    fontFamily: "Montserrat_Bold",
+    fontSize: SIZES.h4,
+    lineHeight: 18,
+  },
+  h5: {
     fontFamily: "Montserrat_Bold",
     fontSize: SIZES.h4,
     lineHeight: 18,
@@ -68,7 +75,11 @@ export const FONTS = {
     fontSize: SIZES.h3,
     lineHeight: 18,
   },
-
+  body4: {
+    fontFamily: "Montserrat_Regular",
+    fontSize: SIZES.h4,
+    lineHeight: 16,
+  },
   desc1: {
     fontFamily: "Montserrat_Light",
     fontSize: SIZES.h2,
@@ -78,6 +89,11 @@ export const FONTS = {
     fontFamily: "Montserrat_Light",
     fontSize: SIZES.h3,
     lineHeight: 18,
+  },
+  desc3: {
+    fontFamily: "Montserrat_Light",
+    fontSize: SIZES.h4,
+    lineHeight: 16,
   },
 };
 
