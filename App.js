@@ -1,6 +1,7 @@
 import "react-native-gesture-handler"; // drawer menu kurulumunda burda en üstte olamak zorunda
 import React from "react";
 import Navigations from "./app/navigations/CustomStackNavigator";
+import { RootSiblingParent } from "react-native-root-siblings";
 import { useFonts } from "expo-font";
 
 const fonts = {
@@ -18,6 +19,10 @@ const App = () => {
     return null;
   }
 
-  return <Navigations />;
+  return (
+    <RootSiblingParent>
+      <Navigations />
+    </RootSiblingParent>
+  );
 };
 export default App;
