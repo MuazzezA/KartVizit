@@ -6,7 +6,7 @@ import Seperator from "./Seperator";
 import IconButton from "./IconButton";
 import SearchBar from "./SearchBar";
 import CustomProgressChart from "./ProgressChart";
-
+import ToastMessage from "./ToastMessage";
 export {
   CustomTextInput,
   CustomButton,
@@ -16,4 +16,5 @@ export {
   IconButton,
   SearchBar,
   CustomProgressChart,
+  ToastMessage,
 };
