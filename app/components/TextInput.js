@@ -25,7 +25,7 @@ const CustomTextInput = ({
         elevation: 4,
       }}
       value={value}
-      onChange={() => onChangeFunc()}
+      onChange={(value) => onChangeFunc(value)}
       placeholder={placeHolderText}
     />
   );
