@@ -6,6 +6,8 @@ import StatisticScreen from "./StatisticScreen";
 import ShareCardScreen from "./ShareCardScreen";
 import CardDetailScreen from "./CardDetailScreen";
 
+import ProfileScreen from "./ProfileScreen";
+import SettingScreen from "./SettingScreen";
 export {
   Home,
   AlertScreen,
@@ -14,4 +16,6 @@ export {
   StatisticScreen,
   ShareCardScreen,
   CardDetailScreen,
+  ProfileScreen,
+  SettingScreen,
 };
