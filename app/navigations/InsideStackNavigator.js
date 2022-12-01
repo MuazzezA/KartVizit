@@ -10,6 +10,7 @@ import {
   StatisticScreen,
   ShareCardScreen,
   CardDetailScreen,
+  CreateCardScreen,
 } from "../screens";
 
 const Stack = createNativeStackNavigator();
@@ -49,6 +50,11 @@ const InsideNavigations = () => {
       <Stack.Screen
         name="CardDetailScreen"
         component={CardDetailScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="CreateCardScreen"
+        component={CreateCardScreen}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

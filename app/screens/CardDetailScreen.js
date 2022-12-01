@@ -1,6 +1,12 @@
 import React from "react";
-import { Text, View, Image, ScrollView, StyleSheet } from "react-native";
-
+import {
+  Text,
+  View,
+  Image,
+  ScrollView,
+  StyleSheet,
+  ImageBackground,
+} from "react-native";
 import { IconButton, Seperator } from "../components/";
 import { theme, icons } from "../constants";
 
@@ -10,34 +16,60 @@ const { thrash, addToContact, share } = icons;
 function textDesc(subject, desc) {
   return (
     <View style={styles.textContainer}>
-      <Text style={{ ...FONTS.h3 }}>{subject} : </Text>
-      <Text style={{ ...FONTS.desc2 }}>{desc} </Text>
+      <Text style={{ ...FONTS.h5 }}>{subject} : </Text>
+      <Text style={{ ...FONTS.desc3 }}>{desc} </Text>
     </View>
   );
 }
-
+async function delete_mycard(index, { navigation }) {
+  if (index != null) {
+    const resp = await fetch(
+      "https://63660cb5046eddf1baf7a688.mockapi.io/api/v1//myCards/" + index,
+      { method: "DELETE" }
+    );
+    //const data = await resp.json();
+    if (resp.status == 200) {
+      navigation.replace("MyCardsScreen");
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+}
 const CardScrollView = ({ card }) => {
   return (
     <ScrollView horizontal showsHorizontalScrollIndicator={false}>
       <View style={styles.scrollInside}>
         <View>
-          <Image source={card.img} resizeMode="contain" style={styles.image} />
-          <Text style={styles.cardDescText}>önyüz</Text>
+          <Image
+            source={{ uri: card.cardImageLink }}
+            resizeMode="contain"
+            style={styles.image}
+          />
+          <Text style={styles.cardDescText}>ÖN</Text>
         </View>
         <View>
-          <Image source={card.img} resizeMode="contain" style={styles.image} />
-          <Text style={styles.cardDescText}>arkayüz</Text>
+          <Image
+            source={{ uri: card.cardBackImageLink }}
+            resizeMode="contain"
+            style={styles.image}
+          />
+          <Text style={styles.cardDescText}>ARKA</Text>
         </View>
       </View>
     </ScrollView>
   );
 };
 
-const Buttons = ({ card, isMyCard }) => {
+const Buttons = ({ index, isMyCard, navigation }) => {
   return (
     <View style={styles.buttonContainer}>
       <View style={styles.centerContainer}>
-        <IconButton icon={thrash} color={COLORS.red} />
+        <IconButton
+          icon={thrash}
+          color={COLORS.red}
+          onPress={() => delete_mycard(index, { navigation })}
+        />
         <Text style={{ ...FONTS.desc2, color: COLORS.red }}>Kartı Sil</Text>
       </View>
 
@@ -61,36 +93,40 @@ const Buttons = ({ card, isMyCard }) => {
 };
 
 const CardDetailScreen = ({ route, navigation }) => {
-  const { card, isMyCard } = route.params;
+  const { card, isMyCard, index } = route.params;
   return (
     <ScrollView>
-      <View style={styles.container}>
-        <View style={styles.centerContainer}>
-          <CardScrollView card={card} />
+      <ImageBackground
+        source={require("../assets/images/beyaz.png")}
+        resizeMode="cover">
+        <View style={styles.container}>
+          <View style={styles.centerContainer}>
+            <CardScrollView card={card} />
+          </View>
+          <Seperator />
+          <Text style={{ ...FONTS.desc2, paddingVertical: SIZES.padding }}>
+            Detaylar
+          </Text>
+
+          {textDesc("Kart Numarası", "1234567890")}
+          {textDesc("Oluşturulma Tarihi", card.createDate)}
+          {textDesc("İsim", card.name)}
+          {textDesc("Soyisim", card.surname)}
+          {textDesc("Cinsiyet", card.gender)}
+          {textDesc("Şirket", card.company)}
+          {textDesc("Ünvan", card.job)}
+          {textDesc("E-Mail Adresi", card.email)}
+          {textDesc("Telefon Numarası", card.phone)}
+          {textDesc("Şehir", card.city)}
+          {textDesc("Adres", card.adres)}
+
+          <Seperator />
+          <Text style={{ ...FONTS.desc2, paddingVertical: SIZES.padding }}>
+            İşlemler
+          </Text>
+          <Buttons index={index} isMyCard={isMyCard} navigation={navigation} />
         </View>
-        <Seperator />
-        <Text style={{ ...FONTS.desc1, paddingVertical: SIZES.padding }}>
-          Detaylar
-        </Text>
-
-        {textDesc("Kart Numarası", "1234567890")}
-        {textDesc("Oluşturulma Tarihi", "xxx")}
-        {textDesc("İsim", "ad")}
-        {textDesc("Soyisim", "soyisim")}
-        {textDesc("Cinsiyet", "Kadın/Erkek")}
-        {textDesc("Şirket", "şehir teknolojileri merkezi")}
-        {textDesc("Ünvan", "jr. mobile dev")}
-        {textDesc("E-Mail Adresi", "mobil@stm.com")}
-        {textDesc("Telefon Numarası", "+90 555 555 55 55")}
-        {textDesc("Ülke/Şehir", "Türkiye/Konya")}
-        {textDesc("Adres", "bilim merkezi ştm")}
-
-        <Seperator />
-        <Text style={{ ...FONTS.desc1, paddingVertical: SIZES.padding }}>
-          İşlemler
-        </Text>
-        <Buttons card={card} isMyCard={isMyCard} />
-      </View>
+      </ImageBackground>
     </ScrollView>
   );
 };
@@ -100,8 +136,8 @@ const styles = StyleSheet.create({
   textContainer: {
     flexDirection: "row",
     alignItems: "center",
-    padding: 5,
-    marginVertical: 5,
+    padding: 1,
+    marginVertical: 3,
   },
   container: {
     paddingVertical: 30,
@@ -123,5 +159,5 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
   },
   scrollInside: { flexDirection: "row" },
-  cardDescText: { textAlign: "center", ...FONTS.h4 },
+  cardDescText: { paddingTop: 3, textAlign: "center", ...FONTS.body4 },
 });

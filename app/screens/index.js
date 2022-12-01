@@ -8,6 +8,8 @@ import CardDetailScreen from "./CardDetailScreen";
 
 import ProfileScreen from "./ProfileScreen";
 import SettingScreen from "./SettingScreen";
+
+import CreateCardScreen from "./CreateCardScreen";
 export {
   Home,
   AlertScreen,
@@ -18,4 +20,5 @@ export {
   CardDetailScreen,
   ProfileScreen,
   SettingScreen,
+  CreateCardScreen,
 };

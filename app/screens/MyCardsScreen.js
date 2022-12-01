@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import {
   Text,
   View,
@@ -7,42 +7,33 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
-import SearchBar from "../components/SearchBar";
-import { theme, icons, images } from "../constants";
+import { CustomButton, SearchBar } from "../components";
+import { theme, icons } from "../constants";
+
 const { COLORS, SIZES, FONTS } = theme;
-const { card1, card2 } = images;
 const { searchIcon } = icons;
 
 // kaydırıldığında search bar kaybolmalı
 
 const MyCardsScreen = ({ navigation }) => {
-  const cards = [
-    {
-      text: "test 1",
-      img: card2,
-    },
-    {
-      text: "test 2",
-      img: card1,
-    },
-    {
-      text: "test 3",
-      img: card2,
-    },
-    {
-      text: "test 4",
-      img: card1,
-    },
-    {
-      text: "test 5",
-      img: card2,
-    },
-  ];
+  const [cardList, setCardList] = React.useState([]);
+
+  useLayoutEffect(() => {
+    async function fetchMyAPI() {
+      let response = await fetch(
+        "https://63660cb5046eddf1baf7a688.mockapi.io/api/v1//myCards"
+      );
+      response = await response.json();
+      setCardList(response);
+    }
+
+    fetchMyAPI();
+  }, []);
 
   function textDesc(subject, desc) {
     return (
       <View style={{ flexDirection: "row", alignItems: "center" }}>
-        <Text style={{ ...FONTS.h3 }}>{subject} : </Text>
+        <Text style={{ ...FONTS.h3 }}>{subject}: </Text>
         <Text style={{ ...FONTS.desc2 }}>{desc} </Text>
       </View>
     );
@@ -53,21 +44,23 @@ const MyCardsScreen = ({ navigation }) => {
       <View key={index} style={styles.renderItems}>
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate("CardDetailScreen", {
+            navigation.replace("CardDetailScreen", {
               card: item,
               isMyCard: true,
+              index: item.id,
             });
           }}
           activeOpacity={0.8}
           style={styles.button}>
           <View style={styles.imageContainer}>
             <Image
-              source={item.img}
+              source={{ uri: item.cardImageLink }}
               resizeMode="contain"
-              style={styles.imageItem}
+              style={{ height: 110, width: 110 }}
+              //style={styles.imageItem}
             />
             <View style={styles.textContainer}>
-              {textDesc(item.text, "1234567890")}
+              {textDesc(index + 1, item.cardTitle)}
             </View>
           </View>
         </TouchableOpacity>
@@ -77,17 +70,27 @@ const MyCardsScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={{ ...FONTS.body2 }}>Oluşturulan Tüm Kartlar</Text>
-      <Text style={{ ...FONTS.desc2 }}>
-        Toplam Kart Sayısı : {cards.length}
+      <Text style={{ ...FONTS.body2 }}>
+        Oluşturulan Tüm Kartlar ({cardList.length})
       </Text>
+
       <SearchBar icon={searchIcon} />
 
-      <FlatList
-        data={cards}
-        keyExtractor={(item) => item.text}
-        renderItem={({ item, index }) => renderItem({ item, index })}
-      />
+      {cardList.length == 0 ? (
+        <View style={{ flex: 1, paddingTop: 30, alignItems: "center" }}>
+          <Text style={{ ...FONTS.h3 }}>Kayıtlı Kartınız Bulunamadı</Text>
+          <CustomButton
+            buttonText={"+ Yeni Kart Oluştur"}
+            onPressFunc={() => navigation.navigate("CreateCardScreen")}
+          />
+        </View>
+      ) : (
+        <FlatList
+          data={cardList}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item, index }) => renderItem({ item, index })}
+        />
+      )}
     </View>
   );
 };
@@ -117,6 +120,7 @@ const styles = StyleSheet.create({
   },
   imageItem: {
     height: 110,
+    width: 110,
     flex: 1,
     alignSelf: "flex-start",
   },
