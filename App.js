@@ -1,7 +1,8 @@
 import "react-native-gesture-handler"; // drawer menu kurulumunda burda en üstte olamak zorunda
 import React from "react";
 import Navigations from "./app/navigations/CustomStackNavigator";
-import { RootSiblingParent } from "react-native-root-siblings";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { RootSiblingParent } from "react-native-root-siblings"; // toast msg cross platform için
 import { useFonts } from "expo-font";
 
 const fonts = {
@@ -21,7 +22,9 @@ const App = () => {
 
   return (
     <RootSiblingParent>
-      <Navigations />
+      <SafeAreaView style={{ flex: 1, backgroundColor: "#B4CDE6" }}>
+        <Navigations />
+      </SafeAreaView>
     </RootSiblingParent>
   );
 };
