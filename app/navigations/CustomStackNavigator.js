@@ -1,13 +1,12 @@
 import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import CustomDrawerNavigator from "./CustomDrawerNavigator";
-
-import { Login, Register, Onboarding } from "../screens/Auth/";
+import { Onboarding, Login, Register } from "../screens/Auth/";
+import TabNavigator from "./TabNavigator";
 
 const Stack = createNativeStackNavigator();
 
-const Navigations = () => {
+const Navigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Onboarding">
@@ -26,14 +25,13 @@ const Navigations = () => {
           component={Register}
           options={{ headerShown: false }}
         />
-
         <Stack.Screen
-          name="CustomDrawerNavigator"
-          component={CustomDrawerNavigator}
+          name="TabNav"
+          component={TabNavigator}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
-export default Navigations;
+export default Navigator;

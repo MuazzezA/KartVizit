@@ -1,5 +1,3 @@
-import Login from "./Login";
-import Register from "./Register";
-import Onboarding from "./Onboading";
-
-export { Login, Register, Onboarding };
+export { Login } from "./Login";
+export { Register } from "./Register";
+export { Onboarding } from "./Onboarding";

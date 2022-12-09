@@ -1,63 +1,36 @@
 import * as React from "react";
-
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
 import {
   Home,
-  AlertScreen,
   MyCardsScreen,
-  MyCardInboxScreen,
-  StatisticScreen,
+  MyInboxScreen,
   ShareCardScreen,
   CardDetailScreen,
   CreateCardScreen,
-} from "../screens";
-
+  StatisticScreen,
+} from "../screens/";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 const Stack = createNativeStackNavigator();
-const InsideNavigations = () => {
+
+const InsideNavigator = ({ route }) => {
+  const { user } = route.params;
   return (
-    <Stack.Navigator initialRouteName="Home">
+    <Stack.Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        headerShown: false,
+      }}>
       <Stack.Screen
         name="Home"
         component={Home}
-        options={{ headerShown: false }}
+        initialParams={{ user: user }}
       />
-      <Stack.Screen
-        name="AlertScreen"
-        component={AlertScreen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="MyCardsScreen"
-        component={MyCardsScreen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="MyCardInboxScreen"
-        component={MyCardInboxScreen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="StatisticScreen"
-        component={StatisticScreen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="ShareCardScreen"
-        component={ShareCardScreen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="CardDetailScreen"
-        component={CardDetailScreen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="CreateCardScreen"
-        component={CreateCardScreen}
-        options={{ headerShown: false }}
-      />
+      <Stack.Screen name="MyCardsScreen" component={MyCardsScreen} />
+      <Stack.Screen name="MyCardInboxScreen" component={MyInboxScreen} />
+      <Stack.Screen name="StatisticScreen" component={StatisticScreen} />
+      <Stack.Screen name="ShareCardScreen" component={ShareCardScreen} />
+      <Stack.Screen name="CardDetailScreen" component={CardDetailScreen} />
+      <Stack.Screen name="CreateCardScreen" component={CreateCardScreen} />
     </Stack.Navigator>
   );
 };
-export default InsideNavigations;
+export { InsideNavigator };

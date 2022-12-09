@@ -1,8 +1,9 @@
 import "react-native-gesture-handler"; // drawer menu kurulumunda burda en üstte olamak zorunda
 import React from "react";
-import Navigations from "./app/navigations/CustomStackNavigator";
-import { RootSiblingParent } from "react-native-root-siblings";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { RootSiblingParent } from "react-native-root-siblings"; // toast msg cross platform için
 import { useFonts } from "expo-font";
+import Navigator from "./app/navigations/CustomStackNavigator";
 
 const fonts = {
   Montserrat_Bold: require("./app/assets/fonts/Montserrat-Bold.ttf"),
@@ -21,7 +22,9 @@ const App = () => {
 
   return (
     <RootSiblingParent>
-      <Navigations />
+      <SafeAreaView style={{ flex: 1, backgroundColor: "#B4CDE6" }}>
+        <Navigator />
+      </SafeAreaView>
     </RootSiblingParent>
   );
 };
