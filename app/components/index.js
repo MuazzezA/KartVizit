@@ -1,20 +1,9 @@
-import CustomTextInput from "./TextInput";
-import CustomButton from "./Button";
-import CustomHeader from "./Header";
-import TextButton from "./TextButton";
-import Seperator from "./Seperator";
-import IconButton from "./IconButton";
-import SearchBar from "./SearchBar";
-import CustomProgressChart from "./ProgressChart";
-import ToastMessage from "./ToastMessage";
-export {
-  CustomTextInput,
-  CustomButton,
-  CustomHeader,
-  TextButton,
-  Seperator,
-  IconButton,
-  SearchBar,
-  CustomProgressChart,
-  ToastMessage,
-};
+export { CustomTextInput } from "./TextInput/TextInput";
+export { CustomButton } from "./Button/Button";
+export { CustomHeader } from "./Header/Header";
+export { TextButton } from "./ButtonText/TextButton";
+export { Seperator } from "./Seperator/Seperator";
+export { IconButton } from "./ButtonIcon/IconButton";
+export { SearchBar } from "./SearchBar/SearchBar";
+export { CustomProgressChart } from "./Chart/ProgressChart";
+export { ToastMessage } from "./Toast/ToastMessage";
