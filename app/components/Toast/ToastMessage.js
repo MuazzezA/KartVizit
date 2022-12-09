@@ -1,6 +1,6 @@
 import Toast from "react-native-root-toast";
 
-export default function ToastMessage(message) {
+export const ToastMessage = (message) => {
   return Toast.show(message, {
     duration: Toast.durations.SHORT,
     position: Toast.positions.BOTTOM,
@@ -9,4 +9,4 @@ export default function ToastMessage(message) {
     animation: true,
     hideOnPress: true,
   });
-}
+};
