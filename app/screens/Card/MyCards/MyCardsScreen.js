@@ -5,15 +5,12 @@ import {
   FlatList,
   Image,
   TouchableOpacity,
-  StyleSheet,
+  ScrollView,
 } from "react-native";
-import { CustomButton, SearchBar } from "../components";
-import { theme, icons } from "../constants";
+import { CustomButton, SearchBar } from "../../../components";
+import { FONTS } from "../../../utils/constants/";
 
-const { COLORS, SIZES, FONTS } = theme;
-const { searchIcon } = icons;
-
-// kaydırıldığında search bar kaybolmalı
+import styles from "./styles";
 
 const MyCardsScreen = ({ navigation }) => {
   const [cardList, setCardList] = React.useState([]);
@@ -26,7 +23,6 @@ const MyCardsScreen = ({ navigation }) => {
       response = await response.json();
       setCardList(response);
     }
-
     fetchMyAPI();
   }, []);
 
@@ -56,8 +52,7 @@ const MyCardsScreen = ({ navigation }) => {
             <Image
               source={{ uri: item.cardImageLink }}
               resizeMode="contain"
-              style={{ height: 110, width: 110 }}
-              //style={styles.imageItem}
+              style={styles.imageItem}
             />
             <View style={styles.textContainer}>
               {textDesc(index + 1, item.cardTitle)}
@@ -69,15 +64,17 @@ const MyCardsScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={{ ...FONTS.body2 }}>
-        Oluşturulan Tüm Kartlar ({cardList.length})
-      </Text>
-
-      <SearchBar icon={searchIcon} />
+    // contentContainerStyle={{ flexGrow: 1 }}
+    <ScrollView>
+      <View style={styles.container}>
+        <Text style={{ ...FONTS.body2 }}>
+          Oluşturulan Tüm Kartlar ({cardList.length})
+        </Text>
+        <SearchBar />
+      </View>
 
       {cardList.length == 0 ? (
-        <View style={{ flex: 1, paddingTop: 30, alignItems: "center" }}>
+        <View style={styles.createCardContainer}>
           <Text style={{ ...FONTS.h3 }}>Kayıtlı Kartınız Bulunamadı</Text>
           <CustomButton
             buttonText={"+ Yeni Kart Oluştur"}
@@ -85,53 +82,20 @@ const MyCardsScreen = ({ navigation }) => {
           />
         </View>
       ) : (
-        <FlatList
-          data={cardList}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item, index }) => renderItem({ item, index })}
-        />
+        <View style={{ flex: 6 }}>
+          <TouchableOpacity
+            style={styles.miniButton}
+            onPress={() => navigation.navigate("CreateCardScreen")}>
+            <Text>Kart Oluştur</Text>
+          </TouchableOpacity>
+          <FlatList
+            data={cardList}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item, index }) => renderItem({ item, index })}
+          />
+        </View>
       )}
-    </View>
+    </ScrollView>
   );
 };
-export default MyCardsScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    paddingTop: 30,
-  },
-  renderItems: {
-    flex: 1,
-    alignItems: "flex-start",
-    marginVertical: 10,
-  },
-  imageContainer: {
-    height: 150,
-    padding: SIZES.padding / 2,
-    width: SIZES.width - SIZES.padding,
-    backgroundColor: COLORS.softBlue,
-    justifyContent: "flex-start",
-    borderRadius: SIZES.radius,
-    flexDirection: "row-reverse",
-    elevation: 5,
-  },
-  imageItem: {
-    height: 110,
-    width: 110,
-    flex: 1,
-    alignSelf: "flex-start",
-  },
-  textContainer: {
-    padding: 3,
-    borderRadius: SIZES.radius,
-    flex: 1,
-  },
-  button: {
-    flex: 1,
-    width: SIZES.width,
-    alignItems: "center",
-  },
-});
+export { MyCardsScreen };
