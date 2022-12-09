@@ -8,4 +8,4 @@ const ShareCardScreen = () => {
     </View>
   );
 };
-export default ShareCardScreen;
+export { ShareCardScreen };
