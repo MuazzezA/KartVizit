@@ -1,17 +1,17 @@
 import React from "react";
 import { View, Text } from "react-native";
 import { ProgressChart } from "react-native-chart-kit";
+import { COLORS, theme } from "../../utils/constants";
+const { SIZES } = theme;
+import styles from "./styles";
 
-import { COLORS, theme } from "../constants/";
-const { FONTS, SIZES } = theme;
-
-const CustomProgressChart = ({
+export const CustomProgressChart = ({
   data = [],
   descriptionText = "",
   isSmallChart = true,
 }) => {
   return (
-    <View style={{ justifyContent: "center" }}>
+    <View>
       <ProgressChart
         data={data}
         width={isSmallChart ? SIZES.width / 2 - 10 : 220}
@@ -24,18 +24,10 @@ const CustomProgressChart = ({
           backgroundGradientTo: COLORS.lightGrey,
           color: (opacity = 1) => `rgba(120, 90, 90, ${opacity})`,
         }}
-        style={{ borderRadius: SIZES.radius }}
       />
-      <Text
-        style={{
-          color: "#785a5a",
-          ...FONTS.desc3,
-          paddingLeft: isSmallChart ? 18 : 37,
-        }}>
+      <Text style={[styles.text, { paddingLeft: isSmallChart ? 18 : 37 }]}>
         {descriptionText}
       </Text>
     </View>
   );
 };
-
-export default CustomProgressChart;
