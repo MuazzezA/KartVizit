@@ -1,45 +1,40 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
-import { theme, images } from "../../constants";
-import { CustomButton, CustomTextInput, TextButton } from "../../components/";
+import { View, Text, ScrollView } from "react-native";
 
-import ToastMessage from "../../components/ToastMessage";
-const { creditcard } = images;
-const { COLORS, SIZES, FONTS } = theme;
+import {
+  CustomButton,
+  CustomTextInput,
+  TextButton,
+  ToastMessage,
+} from "../../../components";
+import LoginIcon from "../../../assets/svg/undraw_button_style_re_uctt.svg";
 
-const Login = ({ navigation }) => {
+import styles from "./styles";
+
+export const Login = ({ navigation }) => {
   const [nick, setNick] = useState("");
   const [password, setPassword] = useState("");
 
   return (
     <ScrollView>
-      <View
-        style={{
-          backgroundColor: COLORS.lightGrey,
-          alignItems: "center",
-        }}>
-        <Image
-          source={creditcard}
-          resizeMode="contain"
-          style={{
-            width: 250,
-            height: 250,
-          }}
-        />
-        <Text style={{ ...FONTS.body2, marginVertical: 20 }}>
-          KULLANICI GİRİŞİ
-        </Text>
+      <View style={styles.container}>
+        <View style={styles.loginImg}>
+          <LoginIcon height="100%" width="100%" />
+        </View>
+        <Text style={styles.header}>KULLANICI GİRİŞİ</Text>
         <TextButton
           onPressFunc={async () => {
-            const resp = await fetch(
-              "https://63660cb5046eddf1baf7a688.mockapi.io/api/v1/user"
-            );
-            const data = await resp.json();
-            navigation.navigate("CustomDrawerNavigator", { user: data[0] });
+            fetch("https://63660cb5046eddf1baf7a688.mockapi.io/api/v1/user", {
+              method: "GET",
+            })
+              .then((response) => response.json())
+              .then((json) => {
+                navigation.navigate("TabNav", { user: json[0] });
+              })
+              .catch((error) => console.error(error));
           }}
-          buttonText={"kaçak giriş"}
+          buttonText={"Giriş"}
         />
-
         <View>
           <CustomTextInput
             placeHolderText="Kullanıcı Adı"
@@ -52,19 +47,21 @@ const Login = ({ navigation }) => {
             onChangeFunc={(e) => setPassword(e.nativeEvent.text)}
           />
         </View>
-        <View
-          style={{
-            marginTop: 30,
-            justifyContent: "center",
-          }}>
+        <View style={styles.buttonContainer}>
           <CustomButton
             buttonText={"Giriş Yap"}
             onPressFunc={async () => {
-              const resp = await fetch(
-                "https://63660cb5046eddf1baf7a688.mockapi.io/api/v1/user"
-              );
-              const data = await resp.json();
-              console.log(data.length);
+              try {
+                const resp = await fetch(
+                  "https://63660cb5046eddf1baf7a688.mockapi.io/api/v1/user"
+                );
+                const data = await resp.json();
+                console.info("datalong: " + data.length);
+              } catch (error) {
+                console.error("error ", data);
+                throw error;
+              }
+
               // hesabın varlığının olmadığı da uyarı olarak verilmeli
 
               if (nick == "" || password == "") {
@@ -80,9 +77,7 @@ const Login = ({ navigation }) => {
                 }
                 if (isUser) {
                   if (password == data[id].password) {
-                    navigation.navigate("CustomDrawerNavigator", {
-                      user: data[id],
-                    });
+                    navigation.navigate("TabNav", { user: data[id] });
                   } else {
                     ToastMessage("Kullanıcı Adı veya Şifre Yanlış");
                   }
@@ -104,19 +99,3 @@ const Login = ({ navigation }) => {
     </ScrollView>
   );
 };
-
-export default Login;
-
-const styles = StyleSheet.create({
-  button: {
-    backgroundColor: COLORS.purple,
-    height: 45,
-    width: 200,
-    borderRadius: SIZES.radius,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  text: {
-    color: COLORS.lightGrey,
-  },
-});
