@@ -1,0 +1,1 @@
+export { ButtonIconMini } from "./ButtonIconMini";
