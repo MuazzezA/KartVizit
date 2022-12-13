@@ -7,3 +7,4 @@ export { IconButton } from "./ButtonIcon/IconButton";
 export { SearchBar } from "./SearchBar/SearchBar";
 export { CustomProgressChart } from "./Chart/ProgressChart";
 export { ToastMessage } from "./Toast/ToastMessage";
+export { ButtonIconMini } from "./ButtonIconMini/";
