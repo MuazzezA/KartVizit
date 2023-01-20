@@ -6,7 +6,7 @@ export default StyleSheet.create({
     height: 30,
     justifyContent: "center",
     alignItems: "center",
-    marginVertical: SIZES.padding,
+    marginTop: SIZES.padding,
     flexDirection: "row",
   },
   text: {
