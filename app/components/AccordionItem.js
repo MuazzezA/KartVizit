@@ -71,3 +71,31 @@ export const AccordionItem = ({title, children, haveSelect = false}) => {
     </TouchableWithoutFeedback>
   );
 };
+
+
+
+const styles =  StyleSheet.create({
+  root: {
+    height: 45,
+    width: '100%',
+    marginVertical: 2,
+    borderWidth: 1,
+    borderRadius: 10,
+    paddingHorizontal: 12,
+    borderColor: colors.purple,
+    backgroundColor: colors.white,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  body: {
+    padding: 5,
+    position: 'absolute',
+  },
+  bodyBackground: {
+    backgroundColor: '#dedede',
+    borderRadius: 10,
+    overflow: 'hidden',
+  },
+  title: {fontSize: sizing.normal, fontWeight: '400'},
+});
