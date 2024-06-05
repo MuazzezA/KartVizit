@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = "https://63660cb5046eddf1baf7a688.mockapi.io/api/v1/";
+const BASE_URL = "mock-api-link";
 
 export default {
   getData: () =>
